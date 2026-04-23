@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.pyo
+data/raw/acv/acv_cdc_test.csv
+data/processed/
+*.pkl
+.DS_Store
