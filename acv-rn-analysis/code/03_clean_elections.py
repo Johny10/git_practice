@@ -193,7 +193,7 @@ def extraire_voix_rn_europeennes(df: pd.DataFrame, scrutin: str) -> pd.DataFrame
             print(f"    → Européennes : {masque.sum()} lignes RN trouvées sur '{col_liste}'")
             return df_rn
 
-    # Colonnes directement nommées RN
+    # Colonnes directement nommées avec un label RN (ex: "Voix_RN", "Voix_RASSEMBLEMENT NATIONAL")
     for col in cols:
         col_up = col.upper()
         if "VOIX" in col_up and any(lbl in col_up for lbl in labels_rn_upper):
@@ -202,6 +202,32 @@ def extraire_voix_rn_europeennes(df: pd.DataFrame, scrutin: str) -> pd.DataFrame
             )
             print(f"    → Voix RN/FN par colonne : '{col}'")
             return df
+
+    # Fallback : colonne générique "Voix_RN" (format test ou variante MI)
+    col_voix_rn_generic = next(
+        (c for c in cols if c.upper().replace("_", "").replace(" ", "") in
+         ("VOIXRN", "VOIXFN", "NBVOIXRN", "VOTERN")), None
+    )
+    if col_voix_rn_generic:
+        df["voix_rn"] = pd.to_numeric(df[col_voix_rn_generic].str.replace(" ", ""),
+                                       errors="coerce")
+        print(f"    → Voix RN générique : '{col_voix_rn_generic}'")
+        return df
+
+    # Fallback : valeurs de col_voix associées à un nom RN dans une colonne nom
+    col_nom = next((c for c in cols if "nom" in c.lower()
+                    and "commune" not in c.lower()), None)
+    if col_nom and col_voix:
+        masque = df[col_nom].astype(str).str.upper().str.contains(
+            "|".join(["LE PEN", "RN", "RASSEMBLEMENT", "FRONT NATIONAL"]), na=False
+        )
+        if masque.sum() > 0:
+            df_rn = df[masque].copy()
+            df_rn["voix_rn"] = pd.to_numeric(
+                df_rn[col_voix].astype(str).str.replace(" ", ""), errors="coerce"
+            )
+            print(f"    → Européennes fallback nom : {masque.sum()} lignes sur '{col_nom}'")
+            return df_rn
 
     print(f"    ⚠️  Voix RN introuvables pour {scrutin} — colonnes : {cols[:15]}...")
     return pd.DataFrame()

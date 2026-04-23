@@ -70,8 +70,8 @@ def preparer_cs2021(panel: pd.DataFrame) -> pd.DataFrame:
     if panel["part_rn"].isna().all():
         raise ValueError("part_rn entièrement manquant — vérifier l'étape 3")
 
-    # annee_traitement : 2018 pour traités, 0 pour contrôles (convention differences)
-    panel["cohort"] = panel["annee_traitement"].fillna(0).astype(int)
+    # annee_traitement : 2018 pour traités, np.nan pour jamais-traités (convention differences)
+    panel["cohort"] = np.where(panel["traite"] == 1, ANNEE_TRAITEMENT, np.nan)
 
     return panel
 
@@ -103,26 +103,37 @@ def estimer_cs2021(panel: pd.DataFrame) -> dict:
         attgt = ATTgt(data=df, cohort_column="cohort")
 
         # Sans covariates d'abord
-        result_sans = attgt.fit(formula="part_rn ~ 1")
-        att_global_sans = result_sans.aggregate("simple")
-        print(f"\n  ATT global (sans covariates) :")
-        print(f"    ATT = {att_global_sans['att'].values[0]:.4f}")
-        print(f"    SE  = {att_global_sans['se'].values[0]:.4f}")
+        def extraire_att_se(agg_df) -> tuple[float, float]:
+            """Extrait ATT et SE depuis le DataFrame MultiIndex de differences."""
+            # Aplatir les colonnes MultiIndex en chaînes
+            cols_flat = ["_".join([s for s in col if s]).strip("_")
+                         for col in agg_df.columns]
+            agg_df.columns = cols_flat
+            col_att = next((c for c in cols_flat if c.endswith("ATT")), None)
+            col_se  = next((c for c in cols_flat if "std_error" in c or "se" in c.lower()), None)
+            att = float(agg_df[col_att].iloc[0]) if col_att else np.nan
+            se  = float(agg_df[col_se].iloc[0])  if col_se  else np.nan
+            return att, se
 
-        results = {"cs2021_sans_cov": {"attgt": result_sans, "att_global": att_global_sans}}
+        result_sans = attgt.fit(formula="part_rn ~ 1")
+        agg_sans = result_sans.aggregate("simple")
+        att_s, se_s = extraire_att_se(agg_sans)
+        print(f"\n  ATT global (sans covariates) :")
+        print(f"    ATT = {att_s:.4f}")
+        print(f"    SE  = {se_s:.4f}")
+
+        results = {"cs2021_sans_cov": {"att": att_s, "se": se_s}}
 
         # Avec covariates si disponibles
         if covariates_dispo:
             formula_cov = "part_rn ~ " + " + ".join(covariates_dispo)
             result_avec = attgt.fit(formula=formula_cov)
-            att_global_avec = result_avec.aggregate("simple")
+            agg_avec = result_avec.aggregate("simple")
+            att_a, se_a = extraire_att_se(agg_avec)
             print(f"\n  ATT global (avec covariates) :")
-            print(f"    ATT = {att_global_avec['att'].values[0]:.4f}")
-            print(f"    SE  = {att_global_avec['se'].values[0]:.4f}")
-            results["cs2021_avec_cov"] = {
-                "attgt": result_avec,
-                "att_global": att_global_avec
-            }
+            print(f"    ATT = {att_a:.4f}")
+            print(f"    SE  = {se_a:.4f}")
+            results["cs2021_avec_cov"] = {"att": att_a, "se": se_a}
 
         return results
 
@@ -269,20 +280,20 @@ def table_resultats_principaux(results_cs: dict, results_twfe: dict) -> None:
     rows = []
 
     if "cs2021_sans_cov" in results_cs:
-        att = results_cs["cs2021_sans_cov"]["att_global"]
+        r = results_cs["cs2021_sans_cov"]
         rows.append({
             "Spécification": "CS2021 (sans covariates)",
-            "ATT": f"{att['att'].values[0]*100:.3f}",
-            "SE":  f"{att['se'].values[0]*100:.3f}",
+            "ATT": f"{r['att']*100:.3f}",
+            "SE":  f"{r['se']*100:.3f}",
             "N communes": "—",
         })
 
     if "cs2021_avec_cov" in results_cs:
-        att = results_cs["cs2021_avec_cov"]["att_global"]
+        r = results_cs["cs2021_avec_cov"]
         rows.append({
             "Spécification": "CS2021 (avec covariates)",
-            "ATT": f"{att['att'].values[0]*100:.3f}",
-            "SE":  f"{att['se'].values[0]*100:.3f}",
+            "ATT": f"{r['att']*100:.3f}",
+            "SE":  f"{r['se']*100:.3f}",
             "N communes": "—",
         })
 
@@ -344,10 +355,25 @@ def main():
 
     table_resultats_principaux(results_cs, results_twfe)
 
-    # Sauvegarde
+    # Extraire les scalaires (pyfixest Feols objects ne sont pas picklables)
+    twfe_serial = {}
+    for k, fit in results_twfe.items():
+        try:
+            twfe_serial[k] = {
+                "coef":   float(fit.coef()["traite_x_post"]),
+                "se":     float(fit.se()["traite_x_post"]),
+                "pvalue": float(fit.pvalue()["traite_x_post"]),
+            }
+        except Exception as exc:
+            print(f"    ⚠️  Sérialisation TWFE '{k}' : {exc}")
+
+    cs_serial = {k: {"att": v["att"], "se": v["se"]}
+                 for k, v in results_cs.items()
+                 if isinstance(v, dict) and "att" in v}
+
     resultats = {
-        "cs2021": results_cs,
-        "twfe": results_twfe,
+        "cs2021":      cs_serial,
+        "twfe":        twfe_serial,
         "event_study": event_df,
     }
     with open(PATHS["processed"] / "did_results.pkl", "wb") as f:

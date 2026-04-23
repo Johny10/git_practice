@@ -73,10 +73,16 @@ def interpoler_covariates(insee: pd.DataFrame) -> pd.DataFrame:
 
     # Reindex par (code_insee, annee) et fill
     insee = insee.sort_values(["code_insee", "annee"])
+
+    def interp_groupe(g):
+        # Réinitialiser le MultiIndex pour pouvoir utiliser method="index"
+        g = g.reset_index(level="code_insee", drop=True)
+        return g.interpolate(method="index").ffill().bfill()
+
     insee_interp = (
         insee.set_index(["code_insee", "annee"])[covariates_dispo]
         .groupby(level="code_insee")
-        .apply(lambda g: g.interpolate(method="index").ffill().bfill())
+        .apply(interp_groupe)
         .reset_index()
     )
     return insee_interp

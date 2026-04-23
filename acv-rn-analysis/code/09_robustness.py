@@ -216,7 +216,21 @@ def sous_echantillons_taille(panel: pd.DataFrame) -> dict:
             print(f"  Sous-échantillon {label} : ATT = {c*100:.3f} pp (SE={s*100:.3f}, p={p:.3f}, N={n})")
             results[label] = {"coef": c, "se": s, "pvalue": p, "n_communes": n}
         except Exception as e:
-            print(f"  Erreur sous-échantillon {label} : {e}")
+            msg = str(e)[:120]
+            print(f"  ⚠️  Sous-échantillon {label} : {msg}")
+            # Fallback : TWFE sans FE commune (moins précis mais évite collinéarité)
+            try:
+                fit2 = pf.feols("part_rn ~ traite_x_post + C(annee_num)",
+                                data=df_sub, vcov={"CRV1": "code_insee"})
+                c = fit2.coef()["traite_x_post"]
+                s = fit2.se()["traite_x_post"]
+                p = fit2.pvalue()["traite_x_post"]
+                n = df_sub["code_insee"].nunique()
+                print(f"    → Fallback (sans FE commune) : ATT={c*100:.3f} pp, N={n}")
+                results[label] = {"coef": c, "se": s, "pvalue": p, "n_communes": n,
+                                  "note": "sans FE commune (fallback)"}
+            except Exception:
+                pass
 
     return results
 
@@ -225,10 +239,9 @@ def sous_echantillons_taille(panel: pd.DataFrame) -> dict:
 
 def estimer_sun_abraham(panel: pd.DataFrame) -> dict:
     """
-    Sun & Abraham (2021) via pyfixest sunab().
-    Cohort-robust estimator pour staggered DiD.
-    Ici toutes les villes ACV ont même cohort = 2018,
-    donc Sun-Abraham ≈ TWFE dans ce cas ; on l'inclut pour cohérence.
+    Sun & Abraham (2021) via pyfixest i() syntax (event-study heterogeneous treatment).
+    Ici toutes les villes ACV ont même cohort = 2018, donc résultat ≈ TWFE ;
+    inclus pour cohérence méthodologique.
     """
     try:
         import pyfixest as pf
@@ -237,18 +250,21 @@ def estimer_sun_abraham(panel: pd.DataFrame) -> dict:
 
     df = panel.dropna(subset=["part_rn"]).copy()
     df["annee_num"] = df["annee"].astype(int)
+    df["traite_x_post"] = df["traite"] * df["post"]
 
-    # cohort : 2018 pour traités, 0 pour contrôles
-    df["cohort_sa"] = np.where(df["traite"] == 1, ANNEE_TRAITEMENT, 0)
-
+    # Interaction traite × i(annee_num, ref=2017) = event study cohort-robust
     try:
         fit = pf.feols(
-            "part_rn ~ sunab(cohort_sa, annee_num) | code_insee + annee_num",
+            "part_rn ~ i(annee_num, traite, ref=2017) | code_insee + annee_num",
             data=df, vcov={"CRV1": "code_insee"}
         )
-        print(f"\n  Sun-Abraham : modèle estimé")
-        print(fit.summary())
-        return {"sun_abraham": fit}
+        coefs = fit.coef()
+        post_coefs = coefs[coefs.index.str.contains("201[89]|202")]
+        if len(post_coefs) > 0:
+            att_sa = float(post_coefs.mean())
+            print(f"\n  Sun-Abraham (i() syntax) : ATT moyen post = {att_sa*100:.3f} pp")
+            return {"sun_abraham": {"att": att_sa, "note": "moyenne coefs post via i()"}}
+        return {}
     except Exception as e:
         print(f"  ⚠️  Sun-Abraham non disponible : {e}")
         return {}
@@ -367,14 +383,15 @@ def main():
     att_se   = 0.01
     event_df = did_results.get("event_study", pd.DataFrame())
 
-    if "cs2021_sans_cov" in did_results.get("cs2021", {}):
-        att_data = did_results["cs2021"]["cs2021_sans_cov"]["att_global"]
-        att_post = float(att_data["att"].values[0])
-        att_se   = float(att_data["se"].values[0])
-    elif "twfe_base" in did_results.get("twfe", {}):
-        fit = did_results["twfe"]["twfe_base"]
-        att_post = float(fit.coef()["traite_x_post"])
-        att_se   = float(fit.se()["traite_x_post"])
+    cs21 = did_results.get("cs2021", {})
+    twfe = did_results.get("twfe", {})
+
+    if "cs2021_sans_cov" in cs21 and "att" in cs21["cs2021_sans_cov"]:
+        att_post = float(cs21["cs2021_sans_cov"]["att"])
+        att_se   = float(cs21["cs2021_sans_cov"]["se"])
+    elif "twfe_base" in twfe and isinstance(twfe["twfe_base"], dict):
+        att_post = float(twfe["twfe_base"].get("coef", 0.0))
+        att_se   = float(twfe["twfe_base"].get("se", 0.01))
 
     print(f"\n  ATT de référence : {att_post*100:.3f} pp (SE={att_se*100:.3f})")
 
