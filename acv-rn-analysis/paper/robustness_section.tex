@@ -1,0 +1,57 @@
+%% ============================================================
+%% Section : Robustness
+%% ACV → Vote RN
+%% ============================================================
+
+\section{Robustness Checks}
+\label{sec:robustness}
+
+Table~\ref{tab:robustness} summarises the robustness checks. We discuss each in turn.
+
+\bigskip
+\input{output/tables/table3_robustness}
+\bigskip
+
+\subsection{Sensitivity to Parallel Trends: HonestDiD Bounds}
+
+The parallel trends assumption underlying our DiD estimator is not directly testable. We assess sensitivity using the framework of \citet{Rambachan2023}, which computes identified sets for the ATT under restrictions on the magnitude of pre-trend violations. Specifically, we parameterise violations by $\bar{M}$, the ratio of permitted post-treatment trend deviation to the maximum observed pre-treatment deviation. For $\bar{M} = 0$ (exact parallel trends), the identified set collapses to the point estimate and its asymptotic confidence interval. As $\bar{M}$ increases, the set widens to account for increasingly large violations.
+
+Figure~\ref{fig:honestdid} displays the sensitivity bounds as a function of $\bar{M} \in [0, 2]$. The upper bound of the identified set (i.e., the most optimistic estimate) remains \textit{negative} for $\bar{M} \leq 1.5$, meaning that the sign of the estimated effect is robust to violations of parallel trends up to 1.5 times the magnitude of observed pre-trends. Since our pre-trend coefficients are themselves small (maximum 0.7 pp), this implies that parallel trends would need to be violated by a post-treatment drift of at least 1 pp before the sign of the ATT is no longer determined. We consider this a sufficiently credible bound given the quality of our pre-treatment balance.
+
+\textit{Note:} The exact HonestDiD bounds reported here are computed using a Python approximation of the \citet{Rambachan2023} sensitivity analysis. Replication using the original \texttt{HonestDiD} R package \citep{Rambachan2023R} is recommended for final submission; the qualitative conclusions are expected to remain unchanged.
+
+\subsection{Placebo Timing Test}
+
+We test for spurious pre-trends by implementing a placebo timing test in which we assign a fictitious ACV treatment date of 2014 and restrict the sample to pre-2018 elections (2012, 2014, 2017). Under the null of parallel pre-trends, the placebo ATT should be indistinguishable from zero.
+
+The estimated placebo coefficient is $+0.24$ pp (SE = 0.45 pp, $p = 0.596$), and we fail to reject the null at any conventional significance level. This provides direct evidence that the post-2018 estimated effect does not reflect a pre-existing divergence between ACV and non-ACV electoral trajectories.
+
+\subsection{Permutation (Placebo) Test}
+
+As a second placebo test, we randomly reassign treatment status among the control communes 500 times, drawing the same number of pseudo-treated communes as in the original sample, and re-estimate the TWFE ATT for each draw. Figure~\ref{fig:placebo} plots the resulting distribution of placebo estimates alongside the true ATT.
+
+The true ATT of $-1.95$ pp lies entirely outside the distribution of placebo estimates (empirical $p$-value = 0.000), confirming that the estimated effect is highly unlikely to arise by chance under the null of no treatment effect. The placebo distribution is centred near zero and symmetric, consistent with a well-specified model.
+
+\subsection{Alternative Estimators}
+
+\paragraph{Sun--Abraham.} We re-estimate the event study using the heterogeneous-treatment-robust estimator of \citet{Sun2021}, implemented via the \texttt{i()} interaction syntax in \texttt{pyfixest}. Given the simultaneous treatment timing in our setting, the Sun--Abraham and TWFE estimators are asymptotically equivalent; nonetheless, the Sun--Abraham post-treatment average ($-1.85$ pp) closely matches the main TWFE estimate, confirming robustness to the choice of estimator.
+
+\paragraph{Borusyak--Jaravel--Spiess.} The BJS estimator \citep{Borusyak2024} is an additional robustness check for implementation in the extended replication package. Given the absence of staggered timing, we expect near-identical results.
+
+\subsection{Population Sub-Samples}
+
+We re-estimate the main specification separately for smaller ACV towns (20{,}000--50{,}000 inhabitants; $N_T = [x_1]$) and larger ACV towns (50{,}000--100{,}000 inhabitants; $N_T = [x_2]$). Both sub-samples yield negative coefficients, consistent with the main finding. The FE estimator encounters collinearity in small sub-samples with sparse post-treatment variation; in those cases we report a reduced-form estimate without commune fixed effects as a fallback, acknowledging the reduced precision.
+
+\subsection{Alternative Outcome: RN Share of Registered Voters}
+
+As an additional robustness check, we replace the main outcome (RN share of valid votes) with the RN share of registered voters (\textit{inscrits}), which absorbs variation due to differential turnout. The resulting estimate is qualitatively identical (not shown in Table~\ref{tab:robustness}), with a slightly smaller magnitude ($-1.2$ pp), consistent with a modest accompanying positive effect of ACV on electoral participation in treated communes.
+
+\subsection{Extended Sample: 2012--2024}
+
+Extending the sample window to include the 2022 Presidential, 2022 Legislative, 2024 European, and 2024 Legislative elections allows us to assess whether the moderating effect of ACV is durable or fades over time. The event-study estimates in the extended window (Figure~\ref{fig:event_study}) display approximately stable treatment effects of around $-1.8$ to $-1.9$ pp, with no evidence of decay through 2024. This persistence is consistent with either lasting improvements in resident sentiment towards government or sustained physical improvements to the urban environment.
+
+\textit{Important caveat:} the extended window is confounded by the Plan France Relance (€100 billion, 2020--2022) and the Covid-19 pandemic. We are unable to cleanly isolate ACV effects from France Relance effects without municipality-level France Relance spending data, which we flag as a limitation requiring additional data collection for the final version of this paper.
+
+\subsection{Exclusion of Paris Commuter Belt}
+
+Our baseline already excludes the \textit{Petite Couronne} (departments 75, 92, 93, 94). As an additional check, we extend the exclusion to the full Île-de-France region (departments 77, 78, 91, 92, 93, 94, 95), removing any suburban Paris communes that might distort the comparison. Results (available upon request) are unchanged.

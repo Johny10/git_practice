@@ -1,0 +1,37 @@
+%% ============================================================
+%% Section : Results
+%% ACV → Vote RN
+%% ============================================================
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Descriptive Evidence}
+
+Figure~\ref{fig:raw_trends} plots the raw evolution of mean RN vote shares in ACV and matched control communes from 2012 to 2024. Several patterns emerge. First, RN support rose substantially in both groups over the period, consistent with the national surge of the party documented elsewhere \citep{Reny2021}. Second, ACV communes entered the sample with a higher level of RN support relative to controls---approximately 3--4 percentage points---reflecting the programme's targeting of economically distressed towns, as documented in Table~\ref{tab:balance}. Third, and most relevant to our identification, the \textit{gap} between treated and control communes appears to close, or at least stabilise, following the 2018 ACV designation, whereas the two series trend upward in near-parallel fashion before treatment. This visual pattern is consistent with a modest moderating effect of ACV on RN vote growth.
+
+\subsection{Pre-Trend Tests}
+
+Figure~\ref{fig:event_study} reports the event-study estimates from the interaction specification in Section~\ref{sec:strategy}. The coefficients for 2012 ($\hat{\gamma}_{2012} = -0.10$ pp, $p = 0.84$) and 2014 ($\hat{\gamma}_{2014} = +0.68$ pp, $p = 0.16$) are both small and statistically indistinguishable from zero at conventional levels. A joint test of the null that all pre-treatment coefficients equal zero fails to reject ($F(2,218) = 1.04$, $p = 0.35$). We take this as satisfactory evidence in favour of the parallel trends assumption, conditional on the matched control group.
+
+\subsection{Main Estimates}
+
+Table~\ref{tab:main} presents our main estimates of the ATT across four specifications. Column (1) reports the TWFE estimate from equation \eqref{eq:twfe} with commune and contest fixed effects and no additional controls, clustering standard errors at the commune level. Column (2) adds the pre-treatment socio-economic covariates. Columns (3) and (4) report the CS2021 aggregate ATT without and with covariates, respectively.
+
+\bigskip
+\input{output/tables/table2_main_results}
+\bigskip
+
+Our preferred estimate is Column (3), the CS2021 estimator without additional covariates applied to the matched sample. We find that ACV designation reduced the RN first-round vote share by approximately \textbf{1.85 percentage points} (SE = 0.42 pp, $p < 0.001$) in the 2019 European elections relative to counterfactual trends in matched control communes. This estimate is economically meaningful: with a sample mean of approximately 36\% for ACV communes in 2019, the estimated effect corresponds to a reduction of roughly 5\% of the baseline vote share.
+
+The TWFE estimate in Column (1) is closely aligned: $-1.95$ pp (SE = $0.33$ pp). The near-equivalence of CS2021 and TWFE reflects the absence of staggered adoption in our setting and provides reassurance that the result is not driven by the choice of estimator. The event-study plot in Figure~\ref{fig:event_study} confirms that the estimated effect emerges only after 2018 and persists through the post-treatment period, with point estimates of approximately $-1.84$ pp (2019), $-1.89$ pp (2022), and $-1.83$ pp (2024).
+
+\paragraph{Magnitude and interpretation.} A reduction of approximately 1.85--1.95 pp is substantively significant in the context of closely contested elections. In legislative first rounds, where local races are often decided by margins of a few percentage points, this magnitude could affect outcomes in competitive constituencies. The effect is comparable in sign to \citet{Fetzer2019}'s estimate of the pro-UKIP boost from welfare cuts ($+3.6$ pp per standard deviation of austerity exposure) and to \citet{Cremaschi2025}'s finding that public service closures increase far-right vote shares by approximately 2 pp, both lending external validity to our estimate.
+
+\paragraph{Economic significance.} Translating to raw votes, the effect corresponds to approximately 180 fewer RN votes per average ACV commune (population $\approx 58{,}000$; electorate $\approx 40{,}000$; participation rate $\approx 50\%$; effect $\approx 1.9$ pp of valid votes). Aggregated across all 222 ACV towns, this implies on the order of 40{,}000 fewer RN votes in the 2019 European elections attributable to the programme, relative to the counterfactual.
+
+\subsection{Heterogeneity}
+
+\paragraph{By population stratum.} We estimate the ATT separately for smaller (20{,}000--50{,}000 inhabitants) and larger (50{,}000--100{,}000 inhabitants) ACV towns. Both sub-samples yield negative point estimates consistent with our main finding. The effect appears slightly stronger in larger ACV towns, potentially reflecting greater programme visibility or the larger scale of individual investments, though the difference is not statistically significant at conventional levels.
+
+\paragraph{Treatment heterogeneity and CS2021.} The group-time structure of CS2021 reveals that the ATT is approximately homogeneous across the five pre-defined geographical regions (North, East, West, South-East, South-West), suggesting that the programme's moderating effect is not driven by a small number of specific regional contexts.

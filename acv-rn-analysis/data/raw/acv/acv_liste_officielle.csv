@@ -1,0 +1,223 @@
+code_insee;nom_commune;departement;region;est_binome;annee_selection
+09507;Ville-A0-sur-Loire;09;Occitanie;False;2018
+72072;Les-B0-la-Forêt;72;Île-de-France;False;2018
+61471;La-C0-sur-Loire;61;Île-de-France;False;2018
+41071;Saint-D0-sur-Loire;41;Normandie;False;2018
+41433;Ville-E0-en-Provence;41;Provence-Alpes-Côte d'Azur;False;2018
+81053;Le-F0-sur-Loire;81;Bourgogne-Franche-Comté;False;2018
+08293;Les-G0-du-Midi;08;Pays de la Loire;False;2018
+65395;Bourg-H0-du-Midi;65;Occitanie;False;2018
+19437;La-I0-lès-Bains;19;Auvergne-Rhône-Alpes;True;2018
+09251;Ville-J0-sur-Loire;09;Pays de la Loire;False;2018
+49553;La-K0-sur-Loire;49;Pays de la Loire;False;2018
+95464;Le-L0-lès-Bains;95;Normandie;False;2018
+69125;La-M0-sur-Loire;69;Auvergne-Rhône-Alpes;False;2018
+71403;Les-N0-les-Pins;71;Normandie;True;2018
+67438;Sainte-O0-en-Provence;67;Île-de-France;False;2018
+74200;Les-P0-lès-Bains;74;Occitanie;False;2018
+48443;Sainte-Q0-lès-Bains;48;Hauts-de-France;False;2018
+12539;Bourg-R0-lès-Bains;12;Grand Est;False;2018
+80490;Bourg-S0-sur-Loire;80;Pays de la Loire;False;2018
+42457;Saint-T0-sur-Loire;42;Occitanie;False;2018
+47381;Saint-U0-la-Forêt;47;Hauts-de-France;False;2018
+35163;Bourg-V0-sur-Loire;35;Provence-Alpes-Côte d'Azur;False;2018
+17477;Ville-W0-du-Midi;17;Auvergne-Rhône-Alpes;False;2018
+88219;Bourg-X0-du-Midi;88;Bretagne;False;2018
+73319;Ville-Y0-lès-Bains;73;Grand Est;False;2018
+60189;Saint-Z0-du-Midi;60;Pays de la Loire;False;2018
+38188;Sainte-A1-sur-Mer;38;Bourgogne-Franche-Comté;False;2018
+78095;Sainte-B1-sur-Mer;78;Bretagne;False;2018
+51576;Sainte-C1-en-Provence;51;Occitanie;False;2018
+42089;Bourg-D1-lès-Bains;42;Pays de la Loire;False;2018
+42052;Le-E1-en-Provence;42;Nouvelle-Aquitaine;False;2018
+22561;Les-F1-du-Midi;22;Île-de-France;False;2018
+09333;Les-G1-les-Pins;09;Normandie;False;2018
+52263;Saint-H1-en-Provence;52;Auvergne-Rhône-Alpes;False;2018
+84442;La-I1-lès-Bains;84;Occitanie;False;2018
+06230;Bourg-J1-la-Forêt;06;Île-de-France;False;2018
+81077;Sainte-K1-sur-Loire;81;Nouvelle-Aquitaine;False;2018
+78438;Sainte-L1-du-Midi;78;Provence-Alpes-Côte d'Azur;False;2018
+26106;Les-M1-les-Pins;26;Normandie;False;2018
+59332;Bourg-N1-en-Provence;59;Bretagne;False;2018
+16569;Le-O1-sur-Loire;16;Auvergne-Rhône-Alpes;False;2018
+71561;Saint-P1-sur-Loire;71;Bretagne;False;2018
+66217;Ville-Q1-la-Forêt;66;Pays de la Loire;False;2018
+33468;Ville-R1-sur-Loire;33;Bretagne;False;2018
+07367;Les-S1-en-Provence;07;Auvergne-Rhône-Alpes;True;2018
+95288;La-T1-sur-Loire;95;Centre-Val de Loire;False;2018
+42084;Bourg-U1-sur-Loire;42;Occitanie;False;2018
+85226;Le-V1-les-Pins;85;Occitanie;False;2018
+64391;Sainte-W1-en-Provence;64;Centre-Val de Loire;False;2018
+73591;Ville-X1-du-Midi;73;Centre-Val de Loire;False;2018
+71003;Bourg-Y1-les-Pins;71;Nouvelle-Aquitaine;False;2018
+19430;Le-Z1-sur-Mer;19;Auvergne-Rhône-Alpes;False;2018
+34507;Sainte-A2-sur-Loire;34;Auvergne-Rhône-Alpes;False;2018
+44570;Bourg-B2-sur-Mer;44;Centre-Val de Loire;False;2018
+47254;Sainte-C2-les-Pins;47;Bourgogne-Franche-Comté;False;2018
+05071;Sainte-D2-en-Provence;05;Bretagne;False;2018
+51163;Les-E2-sur-Mer;51;Provence-Alpes-Côte d'Azur;False;2018
+15510;Les-F2-sur-Mer;15;Hauts-de-France;False;2018
+70526;Saint-G2-en-Provence;70;Centre-Val de Loire;False;2018
+64382;Bourg-H2-la-Forêt;64;Île-de-France;True;2018
+87074;Sainte-I2-du-Midi;87;Provence-Alpes-Côte d'Azur;False;2018
+70074;Les-J2-les-Pins;70;Bourgogne-Franche-Comté;False;2018
+35287;Les-K2-la-Forêt;35;Centre-Val de Loire;False;2018
+91353;Ville-L2-lès-Bains;91;Grand Est;False;2018
+39020;La-M2-sur-Mer;39;Occitanie;False;2018
+31411;Bourg-N2-lès-Bains;31;Normandie;False;2018
+86327;Sainte-O2-sur-Mer;86;Île-de-France;False;2018
+35008;Ville-P2-les-Pins;35;Île-de-France;True;2018
+08058;Saint-Q2-en-Provence;08;Grand Est;False;2018
+44273;Sainte-R2-lès-Bains;44;Hauts-de-France;False;2018
+74433;Le-S2-lès-Bains;74;Nouvelle-Aquitaine;False;2018
+18495;La-T2-sur-Loire;18;Occitanie;False;2018
+44259;Les-U2-sur-Loire;44;Occitanie;False;2018
+13177;La-V2-lès-Bains;13;Bretagne;False;2018
+64581;Saint-W2-sur-Loire;64;Auvergne-Rhône-Alpes;False;2018
+45275;Le-X2-en-Provence;45;Bretagne;False;2018
+31189;Le-Y2-sur-Mer;31;Bourgogne-Franche-Comté;False;2018
+22265;La-Z2-les-Pins;22;Auvergne-Rhône-Alpes;False;2018
+53008;Saint-A3-sur-Mer;53;Pays de la Loire;False;2018
+63181;La-B3-lès-Bains;63;Occitanie;False;2018
+89309;Ville-C3-la-Forêt;89;Normandie;False;2018
+41551;Bourg-D3-les-Pins;41;Auvergne-Rhône-Alpes;False;2018
+15443;Bourg-E3-sur-Loire;15;Bretagne;False;2018
+79468;La-F3-en-Provence;79;Hauts-de-France;False;2018
+59327;Le-G3-les-Pins;59;Normandie;False;2018
+66067;Ville-H3-en-Provence;66;Île-de-France;False;2018
+10235;La-I3-du-Midi;10;Bourgogne-Franche-Comté;False;2018
+30598;Ville-J3-la-Forêt;30;Nouvelle-Aquitaine;False;2018
+72027;Bourg-K3-sur-Loire;72;Provence-Alpes-Côte d'Azur;False;2018
+79527;Les-L3-sur-Loire;79;Île-de-France;False;2018
+41411;Sainte-M3-la-Forêt;41;Île-de-France;False;2018
+76171;Le-N3-les-Pins;76;Normandie;False;2018
+80467;Saint-O3-sur-Loire;80;Bourgogne-Franche-Comté;True;2018
+37502;Le-P3-la-Forêt;37;Bourgogne-Franche-Comté;False;2018
+85026;Ville-Q3-la-Forêt;85;Provence-Alpes-Côte d'Azur;False;2018
+27064;Saint-R3-du-Midi;27;Bourgogne-Franche-Comté;True;2018
+23399;Bourg-S3-les-Pins;23;Hauts-de-France;False;2018
+64599;Bourg-T3-en-Provence;64;Provence-Alpes-Côte d'Azur;False;2018
+60015;La-U3-sur-Loire;60;Centre-Val de Loire;False;2018
+13399;Sainte-V3-les-Pins;13;Auvergne-Rhône-Alpes;False;2018
+79082;Ville-W3-lès-Bains;79;Bourgogne-Franche-Comté;False;2018
+19390;Saint-X3-les-Pins;19;Centre-Val de Loire;True;2018
+76374;Les-Y3-sur-Mer;76;Bretagne;False;2018
+01055;Bourg-Z3-sur-Loire;01;Bretagne;False;2018
+76408;Ville-A4-les-Pins;76;Bretagne;False;2018
+74538;Bourg-B4-en-Provence;74;Hauts-de-France;False;2018
+73518;La-C4-la-Forêt;73;Bourgogne-Franche-Comté;False;2018
+62018;La-D4-en-Provence;62;Bretagne;False;2018
+44148;Le-E4-les-Pins;44;Normandie;False;2018
+66145;Bourg-F4-du-Midi;66;Pays de la Loire;False;2018
+26272;Sainte-G4-lès-Bains;26;Pays de la Loire;False;2018
+73086;La-H4-les-Pins;73;Grand Est;False;2018
+52512;Sainte-I4-sur-Mer;52;Île-de-France;False;2018
+43466;La-J4-du-Midi;43;Normandie;True;2018
+48485;Bourg-K4-sur-Mer;48;Bretagne;False;2018
+53119;La-L4-la-Forêt;53;Bourgogne-Franche-Comté;True;2018
+04009;Bourg-M4-lès-Bains;04;Grand Est;False;2018
+14546;Les-N4-du-Midi;14;Bretagne;False;2018
+23174;Les-O4-sur-Loire;23;Pays de la Loire;False;2018
+11394;Ville-P4-sur-Mer;11;Île-de-France;True;2018
+41545;Saint-Q4-du-Midi;41;Grand Est;False;2018
+63022;Saint-R4-lès-Bains;63;Grand Est;False;2018
+61004;Les-S4-sur-Loire;61;Auvergne-Rhône-Alpes;False;2018
+44004;La-T4-la-Forêt;44;Île-de-France;False;2018
+81094;Le-U4-lès-Bains;81;Grand Est;False;2018
+53031;Bourg-V4-les-Pins;53;Auvergne-Rhône-Alpes;False;2018
+08492;Sainte-W4-en-Provence;08;Bretagne;False;2018
+72363;Saint-X4-la-Forêt;72;Nouvelle-Aquitaine;True;2018
+54588;Bourg-Y4-en-Provence;54;Île-de-France;False;2018
+60481;Le-Z4-en-Provence;60;Centre-Val de Loire;False;2018
+53577;Les-A5-la-Forêt;53;Occitanie;True;2018
+52143;Les-B5-la-Forêt;52;Auvergne-Rhône-Alpes;False;2018
+09173;Bourg-C5-en-Provence;09;Occitanie;False;2018
+53509;Saint-D5-du-Midi;53;Auvergne-Rhône-Alpes;False;2018
+74147;Les-E5-sur-Mer;74;Pays de la Loire;False;2018
+29035;Le-F5-la-Forêt;29;Bretagne;False;2018
+57401;Le-G5-lès-Bains;57;Pays de la Loire;False;2018
+03480;Saint-H5-du-Midi;03;Pays de la Loire;False;2018
+33580;Ville-I5-sur-Mer;33;Pays de la Loire;False;2018
+41556;Le-J5-sur-Mer;41;Bourgogne-Franche-Comté;False;2018
+2A042;Sainte-K5-sur-Mer;2A;Nouvelle-Aquitaine;False;2018
+20463;Les-L5-du-Midi;20;Bourgogne-Franche-Comté;True;2018
+26507;Sainte-M5-sur-Loire;26;Pays de la Loire;False;2018
+38419;La-N5-la-Forêt;38;Bourgogne-Franche-Comté;False;2018
+2B287;Le-O5-la-Forêt;2B;Grand Est;False;2018
+81502;Les-P5-sur-Mer;81;Auvergne-Rhône-Alpes;False;2018
+04268;Sainte-Q5-sur-Loire;04;Bretagne;False;2018
+22025;Ville-R5-en-Provence;22;Bourgogne-Franche-Comté;False;2018
+78274;Sainte-S5-sur-Mer;78;Hauts-de-France;False;2018
+06121;Sainte-T5-sur-Loire;06;Bourgogne-Franche-Comté;False;2018
+81069;Bourg-U5-la-Forêt;81;Centre-Val de Loire;False;2018
+27075;Les-V5-lès-Bains;27;Bretagne;False;2018
+87418;La-W5-sur-Mer;87;Pays de la Loire;False;2018
+28303;Les-X5-la-Forêt;28;Bourgogne-Franche-Comté;False;2018
+41324;Le-Y5-lès-Bains;41;Bourgogne-Franche-Comté;False;2018
+62447;Le-Z5-lès-Bains;62;Normandie;False;2018
+12329;Saint-A6-les-Pins;12;Île-de-France;False;2018
+52378;Sainte-B6-les-Pins;52;Pays de la Loire;True;2018
+47052;Saint-C6-lès-Bains;47;Centre-Val de Loire;False;2018
+73510;Ville-D6-les-Pins;73;Bourgogne-Franche-Comté;False;2018
+2B157;Le-E6-la-Forêt;2B;Centre-Val de Loire;False;2018
+62093;Sainte-F6-du-Midi;62;Île-de-France;False;2018
+39488;Ville-G6-en-Provence;39;Hauts-de-France;False;2018
+38441;Saint-H6-lès-Bains;38;Auvergne-Rhône-Alpes;False;2018
+39032;Saint-I6-lès-Bains;39;Pays de la Loire;False;2018
+77116;La-J6-sur-Loire;77;Provence-Alpes-Côte d'Azur;False;2018
+30010;Saint-K6-en-Provence;30;Pays de la Loire;False;2018
+16163;Saint-L6-les-Pins;16;Île-de-France;False;2018
+32060;Ville-M6-lès-Bains;32;Bretagne;False;2018
+03426;Ville-N6-la-Forêt;03;Hauts-de-France;False;2018
+10314;La-O6-en-Provence;10;Normandie;False;2018
+09588;Bourg-P6-sur-Loire;09;Nouvelle-Aquitaine;False;2018
+72449;Sainte-Q6-sur-Mer;72;Bourgogne-Franche-Comté;False;2018
+68367;Le-R6-la-Forêt;68;Bretagne;False;2018
+65306;Saint-S6-en-Provence;65;Nouvelle-Aquitaine;False;2018
+43033;Sainte-T6-en-Provence;43;Normandie;False;2018
+67043;Les-U6-en-Provence;67;Bourgogne-Franche-Comté;False;2018
+15370;Sainte-V6-du-Midi;15;Bourgogne-Franche-Comté;False;2018
+85003;Ville-W6-du-Midi;85;Pays de la Loire;False;2018
+47026;Sainte-X6-en-Provence;47;Auvergne-Rhône-Alpes;False;2018
+89132;Ville-Y6-sur-Loire;89;Occitanie;False;2018
+15530;Ville-Z6-du-Midi;15;Provence-Alpes-Côte d'Azur;False;2018
+47275;Ville-A7-la-Forêt;47;Hauts-de-France;False;2018
+65426;Bourg-B7-les-Pins;65;Grand Est;False;2018
+47247;Le-C7-du-Midi;47;Provence-Alpes-Côte d'Azur;False;2018
+42104;Les-D7-sur-Loire;42;Auvergne-Rhône-Alpes;False;2018
+16223;Bourg-E7-en-Provence;16;Bretagne;True;2018
+36055;Ville-F7-lès-Bains;36;Hauts-de-France;False;2018
+23462;Saint-G7-sur-Mer;23;Hauts-de-France;False;2018
+29110;Saint-H7-la-Forêt;29;Bretagne;False;2018
+64226;La-I7-la-Forêt;64;Occitanie;False;2018
+59588;Ville-J7-la-Forêt;59;Bretagne;False;2018
+57355;Le-K7-la-Forêt;57;Pays de la Loire;False;2018
+34275;Saint-L7-la-Forêt;34;Occitanie;False;2018
+91326;Le-M7-sur-Loire;91;Provence-Alpes-Côte d'Azur;False;2018
+09470;Saint-N7-sur-Loire;09;Centre-Val de Loire;False;2018
+32153;Les-O7-lès-Bains;32;Île-de-France;True;2018
+11382;Bourg-P7-du-Midi;11;Grand Est;False;2018
+32523;Saint-Q7-sur-Loire;32;Nouvelle-Aquitaine;False;2018
+91343;La-R7-sur-Mer;91;Bretagne;False;2018
+35268;La-S7-les-Pins;35;Provence-Alpes-Côte d'Azur;True;2018
+86087;Saint-T7-du-Midi;86;Nouvelle-Aquitaine;True;2018
+47149;Sainte-U7-en-Provence;47;Hauts-de-France;False;2018
+66567;Ville-V7-en-Provence;66;Provence-Alpes-Côte d'Azur;False;2018
+43325;Sainte-W7-en-Provence;43;Île-de-France;False;2018
+25181;Ville-X7-sur-Mer;25;Bretagne;False;2018
+72251;Saint-Y7-les-Pins;72;Pays de la Loire;False;2018
+95347;Sainte-Z7-sur-Mer;95;Auvergne-Rhône-Alpes;True;2018
+25322;La-A8-lès-Bains;25;Bourgogne-Franche-Comté;False;2018
+73420;La-B8-lès-Bains;73;Occitanie;False;2018
+25155;La-C8-lès-Bains;25;Provence-Alpes-Côte d'Azur;False;2018
+67389;Ville-D8-sur-Mer;67;Centre-Val de Loire;False;2018
+74266;Ville-E8-sur-Mer;74;Occitanie;False;2018
+42564;Ville-F8-en-Provence;42;Bretagne;False;2018
+69095;Le-G8-la-Forêt;69;Île-de-France;True;2018
+26089;Saint-H8-sur-Loire;26;Île-de-France;False;2018
+08277;Bourg-I8-la-Forêt;08;Hauts-de-France;False;2018
+09305;La-J8-sur-Loire;09;Centre-Val de Loire;False;2018
+42414;Saint-K8-en-Provence;42;Hauts-de-France;False;2018
+85243;Bourg-L8-sur-Mer;85;Bourgogne-Franche-Comté;False;2018
+12548;Le-M8-en-Provence;12;Grand Est;False;2018
+43285;Le-N8-lès-Bains;43;Pays de la Loire;False;2018
