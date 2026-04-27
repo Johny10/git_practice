@@ -1,7 +1,17 @@
 __pycache__/
 *.pyc
 *.pyo
+*.pyo
+
+# Données brutes volumineuses (>100 MB, non pushables sur GitHub)
 data/raw/acv/acv_cdc_test.csv
+general_results.csv
+**/general_results*.csv
+
+# Données processsées (générées par le pipeline, non versionnées)
 data/processed/
 *.pkl
+
+# Système
 .DS_Store
+.env
