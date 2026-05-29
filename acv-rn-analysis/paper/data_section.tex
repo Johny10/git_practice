@@ -1,0 +1,54 @@
+%% ============================================================
+%% Section : Data
+%% ACV → Vote RN
+%% ============================================================
+
+\section{Data}
+\label{sec:data}
+
+\subsection{The Action C\oe ur de Ville Programme}
+
+Action C\oe ur de Ville (ACV) was announced in December 2017 and formalised in March 2018 as part of the government's ``Action for Towns'' national plan. The programme designates 222 French medium-sized towns---and their surrounding municipalities in the case of pairs (\textit{binômes}), yielding 234 communes in total---as priority recipients of a coordinated bundle of urban investment. The selection was made by the Agence Nationale de Cohésion des Territoires (ANCT) on the basis of criteria combining population size (roughly 20{,}000 to 100{,}000 inhabitants), urban decline indicators (commercial vacancy rates, housing degradation, demographic stagnation), and sub-prefectural centrality. The official programme list, which includes commune-level INSEE codes, is publicly available on the open data platform of the Caisse des Dépôts et Consignations.\footnote{Source: \url{https://opendata.caissedesdepots.fr/explore/dataset/villes\_action\_coeurdeville/}.}
+
+The programme operates through four public investors---the French State, the Caisse des Dépôts, Action Logement, and the Agence Nationale de l'Habitat (Anah)---and structures investment along five thematic axes: (i) housing rehabilitation and densification, (ii) commercial and craft revitalisation, (iii) mobility and public space enhancement, (iv) cultural and sports facilities, and (v) digital infrastructure. Total committed investment amounts to approximately \euro{}5 billion over 2018--2022, corresponding to an average of roughly \euro{}22 million per designated municipality. Because investment is \emph{bundled}, \emph{publicly announced}, and \emph{government-attributed}, ACV constitutes a particularly clean laboratory for testing the electoral effects of visible place-based public investment.
+
+\subsection{Electoral Outcomes}
+
+Our primary outcome variable is the first-round vote share of the Rassemblement National (RN, formerly Front National, FN) as a proportion of valid votes cast (\textit{suffrages exprimés}) in national elections at the commune level. We use first-round results throughout because they reflect sincere (rather than strategic) party preferences. Data come from the official publication of the French Ministry of the Interior (\textit{Ministère de l'Intérieur}), made available through the open data portal \texttt{data.gouv.fr}.
+
+We compile results for the following eight electoral contests spanning our full sample window (2012--2024):
+\begin{itemize}
+  \item \textbf{Pre-treatment:} Presidential election 2012 (T1), Legislative elections 2012 (T1), European elections 2014, Presidential election 2017 (T1), Legislative elections 2017 (T1).
+  \item \textbf{Post-treatment, main window:} European elections 2019.
+  \item \textbf{Post-treatment, extended window:} Presidential election 2022 (T1), Legislative elections 2022 (T1), European elections 2024, Legislative elections 2024 (T1).
+\end{itemize}
+
+The candidate or list attributed to the RN/FN is identified as follows: Marine Le Pen (Presidential rounds 2012, 2017, 2022); the front-national/rassemblement-national list (European elections 2014, 2019, 2024); candidates carrying the electoral label \texttt{RN}, \texttt{FN}, or \texttt{RNP} in the Ministry's nuance codes (Legislative elections). We verify the attribution by cross-referencing the candidate's name with the published nuance code. Our harmonisation procedure handles the rebranding of the Front National as Rassemblement National, effective June 2018.
+
+The main outcome is thus:
+\begin{equation}
+  y_{it} = \frac{\text{votes}_{RN,it}}{\text{valid votes}_{it}} \in [0,1]
+\end{equation}
+where $i$ indexes communes and $t$ indexes electoral contests. We also construct the RN vote share relative to registered voters (\textit{inscrits}) as a robustness check.
+
+\subsection{Socio-Economic Covariates}
+
+We assemble a set of pre-treatment socio-economic characteristics from three INSEE sources to construct the matching variables used in our identification strategy (Section~\ref{sec:strategy}).
+
+\paragraph{Population légales.} Municipal population (\textit{population municipale}) from the INSEE legal population counts, compiled across millésimes 2012, 2014, 2016, 2017, and 2018. These data cover all French communes and are updated annually.
+
+\paragraph{Filosofi --- Revenus fiscaux et sociaux.} Median disposable income per consumption unit (\textit{revenu médian par unité de consommation}) from the Fichier localisé social et fiscal (Filosofi), available for millésimes 2012, 2015, and 2017. Filosofi does not cover communes with fewer than approximately 1{,}000 inhabitants, leading to a small fraction of missing values (11\% in our panel); these are handled by median imputation using the commune's département-level value.
+
+\paragraph{Recensement de Population (RP).} Occupational structure and unemployment from the INSEE population census: unemployment rate, share of managerial workers (CSP category 3), and share of blue-collar workers (CSP category 6). Census data are available for millésimes 2012, 2014, 2016, 2018, and 2020; we interpolate linearly between adjacent census rounds to obtain millésime-specific values.
+
+\subsection{Sample Construction}
+
+\paragraph{Treatment group.} The 222 designated ACV towns (234 communes if \textit{binôme} constituent municipalities are treated individually, as in our main specification). We exclude ACV municipalities located in overseas territories (\textit{DOM-TOM}), leaving $N_T = 222$ treated communes in mainland France (no overseas ACV designation was made).
+
+\paragraph{Control group.} All non-ACV communes in mainland France with a population between 20{,}000 and 100{,}000 inhabitants (using the pre-treatment 2017 population légale as reference), excluding the \textit{Petite Couronne} of Paris (departments 75, 92, 93, 94), which follows fundamentally different urban-economic dynamics. This yields $N_C = 497$ control communes before matching.
+
+\paragraph{Commune code harmonisation.} Commune mergers (\textit{communes nouvelles}) and boundary changes between 2012 and 2024 are harmonised using the Code Officiel Géographique (COG) to ensure consistent identifiers across time. Communes that merge with an ACV designated town during the sample period are assigned to the treatment group from the date of merger.
+
+\paragraph{Final panel.} Our main analytical sample is a commune $\times$ electoral-contest panel with $N = 719$ communes and up to six electoral contests, yielding a maximum of $N \times T = 4{,}314$ commune-contest observations in the unbalanced panel prior to matching. After propensity score matching (Section~\ref{sec:strategy}), the estimation sample contains 389 communes (99 treated, 290 matched controls) and 10{,}503 observations.
+
+Table~\ref{tab:balance} reports pre-treatment summary statistics and balance tests comparing ACV and non-ACV communes before matching. As expected given the programme's targeting of declining towns, ACV communes display systematically lower median income (€19{,}006 vs. €20{,}504), higher unemployment (13.8\% vs. 11.6\%), lower managerial employment (11.8\% vs. 14.1\%), and higher pre-existing RN vote shares (35.9\% vs. 32.3\%), all significant at the 1\% level. This selection pattern motivates our matching-based identification strategy.
