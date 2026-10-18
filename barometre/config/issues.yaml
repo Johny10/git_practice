@@ -145,8 +145,7 @@ issues:
       - "hausse d'impôts"
       - "pression fiscale"
       - "matraquage fiscal"
-    exclude:
-      - "fraude fiscale"
+    exclude: []
     notes: >
       Les noms de propositions datées (ex. taxe Zucman) sont volontairement absents.
 
