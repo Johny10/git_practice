@@ -6,28 +6,16 @@ Variables d'environnement optionnelles : MEDIACLOUD_API_KEY
 import os
 import shutil
 import subprocess
-from pathlib import Path
 
 import requests
-import yaml
 
-CONFIG = Path(__file__).resolve().parent.parent / "config" / "issues.yaml"
+from queries import gdelt_query, load_issues
+
 TIMEOUT = 30
 
 
-def gdelt_query(issue):
-    """Construit la requête GDELT DOC 2.0 : (a OR "b c") -"x" sourcecountry:FR."""
-    def term(t):
-        return f'"{t}"' if " " in t or "'" in t or "-" in t else t
-    terms = [term(t) for t in issue["any"]]
-    q = "(" + " OR ".join(terms) + ")" if len(terms) > 1 else terms[0]
-    for x in issue.get("exclude") or []:
-        q += f" -{term(x)}"
-    return q + " sourcecountry:FR sourcelang:french"
-
-
 def check_gdelt():
-    issue = yaml.safe_load(CONFIG.read_text())["issues"]["inflation"]
+    issue = load_issues()["inflation"]
     params = {
         "query": gdelt_query(issue),
         "mode": "timelinevolraw",
