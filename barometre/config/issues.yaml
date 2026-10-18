@@ -1,0 +1,358 @@
+# Grille d'enjeux - Baromètre France
+#
+# Grille : enjeux d'Ipsos "What Worries the World" (WWW).
+# Statut : BROUILLON v0.1, à valider avant toute collecte.
+#
+# Format par enjeu :
+#   ipsos_label : libellé anglais tel qu'il apparaît dans les rapports WWW
+#   cap_major   : code(s) des grands thèmes du Comparative Agendas Project (codebook master)
+#   any         : termes FR (OR). Une chaîne avec espace = expression exacte.
+#   exclude     : termes à exclure (NOT), pour limiter les faux positifs connus
+#   notes       : ambiguïtés connues, à vérifier lors de l'échantillon de 50 articles
+#
+# Les collecteurs construisent eux-mêmes la syntaxe de chaque source à partir de
+# ces listes (GDELT : (a OR "b c") -x ; Media Cloud : Lucene). On n'utilise pas de
+# jokers, parce que GDELT DOC ne les supporte pas : il faut donc lister les variantes
+# morphologiques. Les termes de moins de 3 caractères sont refusés par GDELT.
+#
+# Points à vérifier sur un vrai rapport Ipsos FR :
+#   - liste exacte des enjeux et libellés pour chaque mois de 2020 à aujourd'hui
+#     (des enjeux ont été ajoutés ou retirés, ex. Coronavirus, conflit militaire)
+#   - taille d'échantillon France, si elle est publiée
+
+version: 0.1
+updated: 2026-10-18
+
+issues:
+
+  inflation:
+    ipsos_label: "Inflation"
+    cap_major: [1]            # Macroeconomics
+    any:
+      - inflation
+      - "pouvoir d'achat"
+      - "hausse des prix"
+      - "flambée des prix"
+      - "envolée des prix"
+      - "coût de la vie"
+      - "vie chère"
+      - "prix de l'énergie"
+      - "prix des carburants"
+      - "prix à la consommation"
+    exclude: []
+    notes: >
+      "inflation" seul capte aussi la politique monétaire de la BCE et l'inflation
+      étrangère : c'est accepté, mais à surveiller dans l'échantillon.
+      "prix de l'énergie" recouvre en partie l'enjeu climat/énergie.
+
+  unemployment:
+    ipsos_label: "Unemployment & jobs"
+    cap_major: [5]            # Labor
+    any:
+      - chômage
+      - chômeurs
+      - "demandeurs d'emploi"
+      - "France Travail"
+      - "Pôle emploi"
+      - licenciements
+      - "plan social"
+      - "plans sociaux"
+      - "taux d'emploi"
+      - "assurance chômage"
+    exclude: []
+    notes: >
+      "Pôle emploi" a été renommé "France Travail" le 1er janvier 2024 : on garde
+      les deux noms pour que la série reste continue.
+      "assurance chômage" recouvre en partie l'enjeu programmes sociaux.
+
+  poverty_inequality:
+    ipsos_label: "Poverty & social inequality"
+    cap_major: [13]           # Social welfare
+    any:
+      - pauvreté
+      - précarité
+      - inégalités
+      - "seuil de pauvreté"
+      - "sans-abri"
+      - "sans domicile fixe"
+      - "aide alimentaire"
+      - "Restos du coeur"
+      - "Restos du cœur"
+      - "fracture sociale"
+    exclude: []
+    notes: >
+      "inégalités" capte aussi les inégalités femmes-hommes, territoriales, etc.
+      Une précision basse est possible : réviser ce terme en priorité.
+
+  crime_violence:
+    ipsos_label: "Crime & violence"
+    cap_major: [12]           # Law & crime
+    any:
+      - délinquance
+      - criminalité
+      - insécurité
+      - agression
+      - agressions
+      - homicide
+      - "narcotrafic"
+      - "trafic de drogue"
+      - "règlement de comptes"
+      - "violences urbaines"
+      - cambriolages
+    exclude: []
+    notes: >
+      "insécurité" sert aussi pour "insécurité alimentaire" et "insécurité
+      juridique". Tester l'exclusion de ces expressions si la précision est < 0,8.
+
+  corruption:
+    ipsos_label: "Financial/political corruption"
+    cap_major: [20]           # Government operations
+    any:
+      - corruption
+      - "trafic d'influence"
+      - "prise illégale d'intérêts"
+      - "détournement de fonds"
+      - "conflit d'intérêts"
+      - "emplois fictifs"
+      - "abus de biens sociaux"
+      - "fraude fiscale"
+    exclude: []
+    notes: >
+      Couvre beaucoup d'affaires étrangères (ex. corruption en Ukraine) :
+      ce qui compte est l'offre informationnelle en France, pas le lieu des faits.
+      À discuter.
+
+  taxes:
+    ipsos_label: "Taxes"
+    cap_major: [1]            # Macroeconomics (fiscalité)
+    any:
+      - impôts
+      - impôt
+      - fiscalité
+      - "taxe foncière"
+      - "taxe d'habitation"
+      - "prélèvements obligatoires"
+      - "hausse d'impôts"
+      - "pression fiscale"
+      - "taxe Zucman"
+    exclude:
+      - "impôt de solidarité"   # à retirer si on veut garder l'ISF
+    notes: >
+      "taxe Zucman" vient de l'actualité 2025 : ce terme daté biaise la série
+      vers le haut. Le retirer serait plus neutre ; à trancher.
+      L'exclusion "impôt de solidarité" est un exemple de syntaxe : probablement à supprimer.
+
+  healthcare:
+    ipsos_label: "Healthcare"
+    cap_major: [3]            # Health
+    any:
+      - hôpital
+      - hôpitaux
+      - urgences
+      - "déserts médicaux"
+      - "désert médical"
+      - "système de santé"
+      - "assurance maladie"
+      - "Sécurité sociale"
+      - soignants
+      - "médecins généralistes"
+    exclude: []
+    notes: >
+      "urgences" est très ambigu (état d'urgence, urgence climatique...).
+      On pourrait le remplacer par "services d'urgences". À valider sur l'échantillon.
+
+  immigration:
+    ipsos_label: "Immigration control"
+    cap_major: [9]            # Immigration
+    any:
+      - immigration
+      - immigrés
+      - migrants
+      - "sans-papiers"
+      - "demandeurs d'asile"
+      - "droit d'asile"
+      - OQTF
+      - régularisation
+      - "loi immigration"
+      - expulsions
+    exclude: []
+    notes: >
+      "expulsions" capte aussi les expulsions locatives (logement).
+      "régularisation" a aussi un sens fiscal.
+
+  climate_change:
+    ipsos_label: "Climate change"
+    cap_major: [7]            # Environment
+    any:
+      - "changement climatique"
+      - "réchauffement climatique"
+      - "dérèglement climatique"
+      - "crise climatique"
+      - "gaz à effet de serre"
+      - "émissions de CO2"
+      - "neutralité carbone"
+      - "transition écologique"
+      - "COP30"
+      - "COP31"
+      - "accord de Paris"
+    exclude: []
+    notes: >
+      Les termes COP sont datés : ajouter chaque nouvelle COP ou les supprimer
+      tous. Proposition : les supprimer.
+
+  environment_threats:
+    ipsos_label: "Threats against the environment"
+    cap_major: [7]            # Environment
+    any:
+      - pollution
+      - biodiversité
+      - pesticides
+      - "qualité de l'air"
+      - déforestation
+      - "polluants éternels"
+      - PFAS
+      - sécheresse
+      - "pollution plastique"
+    exclude: []
+    notes: >
+      Recoupe l'enjeu climat (sécheresse). Ipsos sépare ces deux enjeux, donc on
+      les garde séparés ; un même article peut compter dans les deux.
+
+  education:
+    ipsos_label: "Education"
+    cap_major: [6]            # Education
+    any:
+      - "Éducation nationale"
+      - enseignants
+      - professeurs
+      - "l'école"
+      - collège
+      - lycée
+      - Parcoursup
+      - baccalauréat
+      - "rentrée scolaire"
+      - "réforme scolaire"
+    exclude: []
+    notes: >
+      "collège" et "lycée" peuvent n'apparaître que comme lieux dans des faits
+      divers. "l'école" est très large.
+
+  social_programmes:
+    ipsos_label: "Maintaining social programmes"
+    cap_major: [13]           # Social welfare
+    any:
+      - retraites
+      - "réforme des retraites"
+      - "minima sociaux"
+      - RSA
+      - "allocations familiales"
+      - "aides sociales"
+      - "protection sociale"
+      - "État-providence"
+    exclude: []
+    notes: >
+      En France, les retraites dominent probablement cet enjeu (pic en 2023).
+      "RSA" fait trois lettres : vérifier que GDELT l'accepte.
+
+  terrorism:
+    ipsos_label: "Terrorism"
+    cap_major: [16]           # Defense (CAP code le terrorisme sous 16 ou 12 selon versions)
+    any:
+      - terrorisme
+      - terroriste
+      - terroristes
+      - attentat
+      - attentats
+      - djihadiste
+      - djihadistes
+      - "Vigipirate"
+      - radicalisation
+    exclude: []
+    notes: >
+      Vérifier le code CAP du terrorisme dans le codebook master
+      (sous-thème 1615 "Civil defense & homeland security" ou 12xx selon version).
+
+  extremism:
+    ipsos_label: "Rise of extremism"
+    cap_major: [20, 2]        # Government operations / Civil rights
+    any:
+      - extrémisme
+      - "extrême droite"
+      - "extrême gauche"
+      - "ultradroite"
+      - "ultragauche"
+      - populisme
+      - antisémitisme
+    exclude: []
+    notes: >
+      "extrême droite" désigne souvent la vie partisane ordinaire (RN), pas
+      l'extrémisme violent : risque de surestimer la couverture.
+      Enjeu probablement ajouté récemment par Ipsos : vérifier sa date d'entrée.
+
+  moral_decline:
+    ipsos_label: "Moral decline"
+    cap_major: [23]           # Culture (approximation)
+    any:
+      - "déclin moral"
+      - "perte de valeurs"
+      - "perte des repères"
+      - incivilités
+      - "décadence"
+      - "ensauvagement"
+    exclude: []
+    notes: >
+      Enjeu difficile à opérationnaliser avec des mots-clés. La précision et le
+      rappel seront faibles. Le signaler dans l'interface plutôt que de forcer.
+
+  military_conflict:
+    ipsos_label: "Military conflict between nations"
+    cap_major: [16, 19]       # Defense / International affairs
+    any:
+      - guerre
+      - "conflit armé"
+      - "frappes aériennes"
+      - "cessez-le-feu"
+      - "invasion de l'Ukraine"
+      - OTAN
+      - "Bande de Gaza"
+    exclude:
+      - "guerre des prix"
+    notes: >
+      "guerre" est très fréquent et métaphorique : la précision risque d'être
+      sous 0,8. Les termes géographiques (Ukraine, Gaza) sont datés : à discuter.
+      Enjeu ajouté par Ipsos en 2022 : vérifier.
+
+  coronavirus:
+    ipsos_label: "Coronavirus"
+    cap_major: [3]            # Health
+    any:
+      - coronavirus
+      - "Covid-19"
+      - Covid
+      - confinement
+      - "pass sanitaire"
+      - "passe sanitaire"
+      - vaccination
+    exclude: []
+    notes: >
+      Pertinent de 2020 à 2023. Vérifier quand Ipsos a cessé de le publier.
+      "vaccination" capte aussi la grippe, etc.
+
+  access_to_credit:
+    ipsos_label: "Access to credit"
+    cap_major: [15]           # Domestic commerce (banking)
+    any:
+      - "crédit immobilier"
+      - "taux d'intérêt"
+      - "taux immobiliers"
+      - "accès au crédit"
+      - "prêt immobilier"
+      - surendettement
+    exclude: []
+    notes: >
+      "taux d'intérêt" recoupe la macroéconomie et la BCE.
+
+# Enjeux hors grille Ipsos à envisager (ne figurent PAS dans WWW, donc pas de série demande) :
+#   - housing (logement) : CAP 14. Préoccupation forte en France, mais pas d'équivalent Ipsos.
+#   - energy (énergie) : CAP 8.
+# Proposition : ne pas les ajouter en Phase 1.
